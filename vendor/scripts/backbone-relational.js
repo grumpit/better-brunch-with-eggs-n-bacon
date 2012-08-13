@@ -1152,11 +1152,23 @@
 			var setUrl,
 				requests = [],
 				rel = this.getRelation( key ),
+				/*
+				  ALTERED
+				  If you add something like this pseudoCode, it will handle cases where we want to fetch a collection
+				  as a whole, in a single request, provided there is a truthy-returning fetchAsCollection() fn on the collection
+				  model we're wanting to fetch.				*/
 				keyContents = rel && rel.keyContents,
 				toFetch = keyContents && _.select( _.isArray( keyContents ) ? keyContents : [ keyContents ], function( item ) {
 					var id = Backbone.Relational.store.resolveIdForItem( rel.relatedModel, item );
 					return id && ( update || !Backbone.Relational.store.find( rel.relatedModel, id ) );
 				}, this );
+
+			/*
+			  Added so that the request is set up inside the toFetch && toFetch.length conditional
+			*/
+		  if (rel.related.fetchAsCollection()) {
+        toFetch = [true];
+      }
 			
 			if ( toFetch && toFetch.length ) {
 				// Create a model for each entry in 'keyContents' that is to be fetched
@@ -1174,16 +1186,19 @@
 
 					return model;
 				}, this );
+
 				
 				// Try if the 'collection' can provide a url to fetch a set of models in one request.
 				if ( rel.related instanceof Backbone.Collection && _.isFunction( rel.related.url ) ) {
 					setUrl = rel.related.url( models );
 				}
-				
 				// An assumption is that when 'Backbone.Collection.url' is a function, it can handle building of set urls.
 				// To make sure it can, test if the url we got by supplying a list of models to fetch is different from
 				// the one supplied for the default fetch action (without args to 'url').
-				if ( setUrl && setUrl !== rel.related.url() ) {
+				/*
+				  Added rel.related.fetchAsCollection() === true || 
+				*/
+				if ( setUrl && (rel.related.fetchAsCollection() === true || setUrl !== rel.related.url() ) ) {
 					var opts = _.defaults(
 						{
 							error: function() {
@@ -1198,8 +1213,18 @@
 						options,
 						{ add: true }
 					);
-
-					requests = [ rel.related.fetch( opts ) ];
+          // /*
+          //   Conditional ADDED
+          // */
+          if ( rel.related.fetchAsCollection() === true ) {
+            delete opts.add;
+            // use reset instead of add since we are working with a collection
+            opts.reset = true;
+            requests = rel.related.fetch( opts );
+          }
+          else {
+  					requests = [ rel.related.fetch( opts ) ];
+          }
 				}
 				else {
 					requests = _.map( models, function( model ) {
