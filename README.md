@@ -1,6 +1,6 @@
 # Brunch with Eggs and Bacon, but better!
 
-[Twitter Bootstrap](http://twitter.github.com/bootstrap/) Javascript skeleton for [Brunch.io](http://brunch.io) with [LESS](http://lesscss.org/) and [Eco](https://github.com/sstephenson/eco/). Also includes [Backbone.Mediator](https://github.com/chalbert/Backbone-Mediator) for Pub/Sub patterns and [Backbone-Relational](https://github.com/PaulUithol/Backbone-relational) for tasty has-many/belongs-to relationships for your models.
+[Twitter Bootstrap](http://twitter.github.com/bootstrap/) Javascript skeleton for [Brunch.io](http://brunch.io) with [LESS](http://lesscss.org/) and [Eco](https://github.com/sstephenson/eco/). Also includes [Backbone.Mediator](https://github.com/chalbert/Backbone-Mediator) for Pub/Sub patterns
 
 ## Getting started
 
