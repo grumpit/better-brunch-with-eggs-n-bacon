@@ -23,23 +23,24 @@ exports.config =
       order:
         before: [
           'vendor/scripts/console-helper.js',
-          'vendor/scripts/jquery-1.7.2.js',
+          'vendor/scripts/jquery-1.8.2.js',
           'vendor/scripts/underscore-1.4.2.js',
           'vendor/scripts/backbone-0.9.2.js',
           'vendor/scripts/backbone-mediator.js',
 
           # Twitter Bootstrap jquery plugins
-          'vendor/scripts/bootstrap/bootstrap-transition.js',
+          'vendor/scripts/bootstrap/bootstrap-affix.js',
           'vendor/scripts/bootstrap/bootstrap-alert.js',
           'vendor/scripts/bootstrap/bootstrap-button.js',
           'vendor/scripts/bootstrap/bootstrap-carousel.js',
           'vendor/scripts/bootstrap/bootstrap-collapse.js',
           'vendor/scripts/bootstrap/bootstrap-dropdown.js',
           'vendor/scripts/bootstrap/bootstrap-modal.js',
-          'vendor/scripts/bootstrap/bootstrap-tooltip.js',
           'vendor/scripts/bootstrap/bootstrap-popover.js',
           'vendor/scripts/bootstrap/bootstrap-scrollspy.js',
           'vendor/scripts/bootstrap/bootstrap-tab.js',
+          'vendor/scripts/bootstrap/bootstrap-tooltip.js',
+          'vendor/scripts/bootstrap/bootstrap-transition.js',
           'vendor/scripts/bootstrap/bootstrap-typeahed.js'
         ]
 
